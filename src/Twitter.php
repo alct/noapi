@@ -163,6 +163,8 @@ class Twitter
      */
     protected function query_to_meta($query)
     {
+        $query = str_replace(' ', '+', $query);
+
         if (preg_match('~^(?:hashtag:|#)(\w+)$~i', $query, $matches)) {
 
             $type = 'hashtag';
