@@ -93,9 +93,6 @@ class Twitter
                     $details['text']['raw'] = $value;
                     $details['text']['html'] = $this->html($value);
 
-                    // $details['text']['formatted'] = $details['retweet'] ? 'RT @' . $details['user']['name'] . ': ' . $value : $value;
-                    // $details['text']['formatted'] = $this->html($details['text']['formatted'])
-
                     $details['reply'] = substr($value, 0, 1) === '@' ? 1 : 0;
 
                     continue;
