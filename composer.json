@@ -1,6 +1,6 @@
 {
     "name": "alct/noapi",
-    "description": "Social network parser.",
+    "description": "Get structured information out of online services.",
     "homepage": "https://github.com/alct/noapi",
     "keywords": ["parser", "twitter"],
     "license": "GPL-3.0+",
