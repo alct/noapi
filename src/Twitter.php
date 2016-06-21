@@ -11,7 +11,7 @@ class Twitter
     protected function html($string)
     {
         $pattern = [
-            '~(https?://(?:w{3}\d*\.)?([^\s]+))~i' => '<a href="$1" class="url">$2</a>',
+            '~ ?(https?://(?:w{3}\d*\.)?([^\s]+))~i' => ' <a href="$1" class="url">$2</a>',
             '~(?<=[^\w]|^)@(\w+)(?=[^\w]|$)~i' => '<a href="https://twitter.com/$1" class="mention">@<span>$1</span></a>',
             '~(?<=[^\w]|^)#(\w+)(?=[^\w]|$)~iu' => '<a href="https://twitter.com/hashtag/$1" class="hashtag">#<span>$1</span></a>',
             '~\n~' => '<br/>',
