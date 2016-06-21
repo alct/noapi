@@ -11,10 +11,29 @@ class Twitter
     protected function html($string)
     {
         $pattern = [
-            '~ ?(https?://(?:w{3}\d*\.)?([^\s]+))~i' => ' <a href="$1" class="url">$2</a>',
+            '~(https?://(?:w{3}\d*\.)?([^\s]+))~i' => '<a href="$1" class="url">$2</a>',
             '~(?<=[^\w]|^)@(\w+)(?=[^\w]|$)~i' => '<a href="https://twitter.com/$1" class="mention">@<span>$1</span></a>',
             '~(?<=[^\w]|^)#(\w+)(?=[^\w]|$)~iu' => '<a href="https://twitter.com/hashtag/$1" class="hashtag">#<span>$1</span></a>',
             '~\n~' => '<br/>',
+        ];
+
+        return preg_replace(array_keys($pattern), array_values($pattern), $string);
+    }
+
+    /**
+     * Clean Twitter specific text quirks
+     *
+     * @param  string $string
+     * @return string
+     */
+    protected function cleanup($string)
+    {
+        $pattern = [
+            '~pic\.twitter\.com~iU'    => 'https://pic.twitter.com',
+            '~\xc2\xa0~'               => ' ',   // replace non breaking spaces by simple ones
+            '~(?<!^)(https?://)~'      => ' $1', // make sure every URL is preceeded by a whitespace
+            '~\s{2,}~U'                => ' ',   // replace consecutive spaces by a single one
+            '~(https?://[^\s]+) ?…~iU' => '$1',  // remove elipsis after URLs
         ];
 
         return preg_replace(array_keys($pattern), array_values($pattern), $string);
@@ -81,14 +100,7 @@ class Twitter
 
                 if ($key == 'text') {
 
-                    $cleanup = [
-                        '~\xc2\xa0~'               => '',   // remove non breaking spaces
-                        '~\s{2,}~U'                => ' ',  // replace consecutive spaces by a single one
-                        '~(https?://[^\s]+) ?…~iU' => '$1', // remove elipsis after URLs
-                        '~pic\.twitter\.com~iU'    => ' https://pic.twitter.com',
-                    ];
-
-                    $value = preg_replace(array_keys($cleanup), array_values($cleanup), $value);
+                    $value = $this->cleanup($value);
 
                     $details['text']['raw'] = $value;
                     $details['text']['html'] = $this->html($value);
