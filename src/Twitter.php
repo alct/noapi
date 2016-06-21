@@ -85,7 +85,7 @@ class Twitter
                         '~\xc2\xa0~'               => '',   // remove non breaking spaces
                         '~\s{2,}~U'                => ' ',  // replace consecutive spaces by a single one
                         '~(https?://[^\s]+) ?…~iU' => '$1', // remove elipsis after URLs
-                        '~pic\.twitter\.com~iU'    => 'https://pic.twitter.com',
+                        '~pic\.twitter\.com~iU'    => ' https://pic.twitter.com',
                     ];
 
                     $value = preg_replace(array_keys($cleanup), array_values($cleanup), $value);
