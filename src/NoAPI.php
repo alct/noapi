@@ -43,4 +43,42 @@ class NoAPI
         // see https://secure.php.net/manual/en/domdocument.loadhtml.php#52251
         return mb_convert_encoding($res, 'HTML-ENTITIES', 'UTF-8');
     }
+
+    /**
+     * Create local copy of remote images.
+     *
+     * Hotlinking third party content raises privacy and security concerns. This
+     * method allows for easy copying of remote images.
+     *
+     * Copying remote content raises other kind of security concerns, we
+     * mitigate the risks by : checking the mime type against a predefined set ;
+     * ignoring the original file name, extension and metadata ; enforcing part
+     * of the path (prepending "noapi_" to the file name).
+     *
+     * @param string $url       URL of the remote image
+     * @param string $filename  name of the target image
+     * @param string $directory target directory without a ending slash, sys_get_temp_dir() by default
+     * @param bool   $overwrite true to overwrite existing image
+     *
+     * @return string|bool false on error
+     */
+    public static function image_proxy($url, $filename, $directory = null, $overwrite = null)
+    {
+        $allowedmimetype = [ 'image/gif', 'image/jpeg', 'image/png', 'image/x-icon' ];
+
+        $directory = $directory ? $directory : sys_get_temp_dir();
+        $localpath = $directory . '/noapi_'. $filename;
+
+        if (! $overwrite && file_exists($localpath)) return $localpath;
+
+        $image = file_get_contents($url);
+        $finfo = new \finfo(FILEINFO_MIME_TYPE);
+        $mimetype = $finfo->buffer($image);
+
+        if (! in_array($mimetype, $allowedmimetype)) return false;
+
+        if (file_put_contents($localpath, $image) === false) return false;
+
+        return $localpath;
+    }
 }
