@@ -67,7 +67,7 @@ class NoAPI
         $allowedmimetype = [ 'image/gif', 'image/jpeg', 'image/png', 'image/x-icon' ];
 
         $directory = $directory ? $directory : sys_get_temp_dir();
-        $localpath = $directory . '/noapi_'. $filename;
+        $localpath = $directory . '/noapi_' . $filename;
 
         if (! $overwrite && file_exists($localpath)) return $localpath;
 
