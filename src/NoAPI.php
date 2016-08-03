@@ -10,8 +10,9 @@ class NoAPI
     /**
      * Download and return a resource.
      *
-     * @param  string      $url URL of the target page
-     * @return string|bool      false on error
+     * @param string $url URL of the target page
+     *
+     * @return string|bool false on error
      */
     public static function curl($url)
     {

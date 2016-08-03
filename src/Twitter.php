@@ -5,7 +5,8 @@ class Twitter
     /**
      * Add HTML markup around @mentions, #hashtags and URLs ; convert \n to <br/>.
      *
-     * @param  string $string
+     * @param string $string
+     *
      * @return string
      */
     protected function html($string)
@@ -21,9 +22,10 @@ class Twitter
     }
 
     /**
-     * Clean Twitter specific text quirks
+     * Clean Twitter specific text quirks.
      *
-     * @param  string $string
+     * @param string $string
+     *
      * @return string
      */
     protected function cleanup($string)
@@ -42,11 +44,13 @@ class Twitter
     /**
      * Extract a series of information from a twitter page.
      *
-     * See doc/Twitter.md for the detailed structure of the returned array.
+     * @see doc/Twitter.md for the detailed structure of the returned array
+     * @see Twitter::query_to_meta() for details about the $meta array
      *
-     * @param  string     $page content of a twitter page
-     * @param  array      $meta see query_to_meta()
-     * @return array|bool       false on error
+     * @param string $page content of a twitter page
+     * @param array  $meta
+     *
+     * @return array|bool false on error
      */
     protected function parse($page, $meta)
     {
@@ -159,19 +163,17 @@ class Twitter
     }
 
     /**
-     * Convert a query to metadata.
+     * Convert a query to an associative array of metadata.
      *
-     * See doc/Twitter.md
+     * @see doc/Twitter.md
      *
-     * Return an array with the following structure:
+     * @param string $query
      *
-     * (array)
-     *     type  (string) hashtag, search or user
-     *     url   (string) URL of the target page
-     *     query (string)
-     *
-     * @param  string $query
-     * @return array
+     * @return array with the following structure:
+     *     (array)
+     *         type  (string) hashtag, search or user
+     *         url   (string) URL of the target page
+     *         query (string)
      */
     protected function query_to_meta($query)
     {
@@ -204,10 +206,12 @@ class Twitter
     /**
      * Download and parse the twitter page corresponding to a query.
      *
-     * Return an array, see doc/Twitter.md for details.
+     * @see doc/Twitter.md
+     * @see Twitter::query_to_meta()
      *
-     * @param  string     $query see query_to_meta()
-     * @return array|bool        false on error
+     * @param string $query
+     *
+     * @return array|bool false on error
      */
     public function twitter($query)
     {
