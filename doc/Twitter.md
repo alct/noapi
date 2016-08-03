@@ -95,7 +95,7 @@ if ($data = $noapi->twitter($query)) {
 Then, from the command line:
 
 ```bash
-php twitter-to-json.php > wikipedia.json
+php twitter-to-json.php > output.json
 ```
 
 Or, alternatively, access `twitter-to-json.php` from your web browser.
