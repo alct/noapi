@@ -57,9 +57,31 @@ require_once 'vendor/autoload.php';
 use alct\noapi\NoAPI;
 
 $noapi = new NoAPI;
-$query = '@wikipedia';
+$query = 'freedom of panorama';
 
 if ($data = $noapi->twitter($query)) {
+
+    // <optional>
+        // create a local copy of user's avatar to avoid hotlinking (and tracking)
+        // this is not mandatory, see Twitter::image_proxy for more info
+
+        // target directory, defaults to sys_get_temp_dir()
+        $directory = 'avatars';
+
+        // create directory if needed, make sure it is writable
+        if (! is_dir($directory)) mkdir($directory, 0755, true);
+        if (! is_writable($directory)) die('The target directory is not writable.' . PHP_EOL);
+
+        foreach ($data['tweets'] as &$tweet) {
+
+            $url = $tweet['user']['avatar'];
+            $filename = $tweet['user']['name'];
+
+            // by default, NoAPI::image_proxy does not try to overwrite existing images
+            // set the fourth argument to true to change this behaviour
+            $tweet['user']['avatar'] = NoAPI::image_proxy($url, $filename, $directory);
+        }
+    // </optional>
 
     header('Content-Type: application/json; charset: utf-8');
     echo json_encode($data);
