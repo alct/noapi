@@ -57,16 +57,15 @@ class NoAPI
      *
      * @param string $url       URL of the remote image
      * @param string $filename  name of the target image
-     * @param string $directory target directory without a ending slash, sys_get_temp_dir() by default
+     * @param string $directory target directory without a ending slash
      * @param bool   $overwrite true to overwrite existing image
      *
      * @return string|bool false on error
      */
-    public static function image_proxy($url, $filename, $directory = null, $overwrite = null)
+    public static function image_proxy($url, $filename, $directory, $overwrite = null)
     {
         $allowedmimetype = [ 'image/gif', 'image/jpeg', 'image/png', 'image/x-icon' ];
 
-        $directory = $directory ? $directory : sys_get_temp_dir();
         $localpath = $directory . '/noapi_' . $filename;
 
         if (! $overwrite && file_exists($localpath)) return $localpath;
