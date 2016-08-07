@@ -105,6 +105,7 @@ class Twitter
                 if ($key == 'text') {
 
                     $value = $this->cleanup($value);
+                    $value = htmlspecialchars($value, ENT_NOQUOTES);
 
                     $details['text']['raw'] = $value;
                     $details['text']['html'] = $this->html($value);
