@@ -28,7 +28,7 @@ class Twitter
      *
      * @return string
      */
-    protected function cleanup($string)
+    protected function clean($string)
     {
         $pattern = [
             '~pic\.twitter\.com~iU'    => 'https://pic.twitter.com',
@@ -104,7 +104,7 @@ class Twitter
 
                 if ($key == 'text') {
 
-                    $value = $this->cleanup($value);
+                    $value = $this->clean($value);
                     $value = htmlspecialchars($value, ENT_NOQUOTES);
 
                     $details['text']['raw'] = $value;
