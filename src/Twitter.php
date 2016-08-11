@@ -45,7 +45,7 @@ class Twitter
      * Extract a series of information from a twitter page.
      *
      * @see doc/Twitter.md for the detailed structure of the returned array
-     * @see Twitter::query_to_meta() for details about the $meta array
+     * @see Twitter::queryToMeta() for details about the $meta array
      *
      * @param string $page content of a twitter page
      * @param array  $meta
@@ -176,7 +176,7 @@ class Twitter
      *         url   (string) URL of the target page
      *         query (string)
      */
-    protected function query_to_meta($query)
+    protected function queryToMeta($query)
     {
         $query = str_replace(' ', '+', $query);
 
@@ -208,7 +208,7 @@ class Twitter
      * Download and parse the twitter page corresponding to a query.
      *
      * @see doc/Twitter.md
-     * @see Twitter::query_to_meta()
+     * @see Twitter::queryToMeta()
      *
      * @param string $query
      *
@@ -216,7 +216,7 @@ class Twitter
      */
     public function twitter($query)
     {
-        $meta = $this->query_to_meta($query);
+        $meta = $this->queryToMeta($query);
 
         if (! $page = NoAPI::curl($meta['url'])) return false;
 

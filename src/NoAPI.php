@@ -62,7 +62,7 @@ class NoAPI
      *
      * @return string|bool false on error
      */
-    public static function image_proxy($url, $filename, $directory, $overwrite = null)
+    public static function imageProxy($url, $filename, $directory, $overwrite = null)
     {
         $allowedmimetype = [ 'image/gif', 'image/jpeg', 'image/png', 'image/x-icon' ];
 

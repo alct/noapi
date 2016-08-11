@@ -13,7 +13,7 @@ Note: the `user_stats` subarray is only provided for user pages.
 ```
 (array)
     meta (array)
-        query (string) see query_to_meta()
+        query (string) see queryToMeta()
         url   (string) idem
         type  (string) idem
     tweets (array)
@@ -63,7 +63,7 @@ if ($data = $noapi->twitter($query)) {
 
     // <optional>
     // create a local copy of users' profile pictures to avoid hotlinking (and tracking)
-    // this is not mandatory, see Twitter::image_proxy() for more info
+    // this is not mandatory, see Twitter::imageProxy() for more info
 
     // target directory
     $directory = 'img';
@@ -77,9 +77,9 @@ if ($data = $noapi->twitter($query)) {
         $url = $tweet['user']['avatar'];
         $filename = $tweet['user']['name'];
 
-        // by default, NoAPI::image_proxy() does not try to overwrite existing images
+        // by default, NoAPI::imageProxy() does not try to overwrite existing images
         // set the fourth argument to true to change this behaviour
-        $tweet['user']['avatar'] = NoAPI::image_proxy($url, $filename, $directory);
+        $tweet['user']['avatar'] = NoAPI::imageProxy($url, $filename, $directory);
     }
     // </optional>
 
