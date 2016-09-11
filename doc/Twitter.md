@@ -63,7 +63,7 @@ if ($data = $noapi->twitter($query)) {
 
     // <optional>
     // create a local copy of users' profile pictures to avoid hotlinking (and tracking)
-    // this is not mandatory, see Twitter::imageProxy() for more info
+    // this is not mandatory, see NoAPI::imageProxy() for more info
 
     // target directory
     $directory = 'img';

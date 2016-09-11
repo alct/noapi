@@ -4,14 +4,11 @@ The NoAPI library eases the process of getting structured information out of onl
 
 Information wants to be free. Users should not be forced to use bloated, non-anonymous, APIs. This being said, behave respectfully and avoid querying their servers every second or on every page load, think about implementing a cache.
 
+Hosted example: [Tweetwall using NoAPI](https://loconte.be/tmp/noapi/example/)
+
 ## Supported services
 
 * [Twitter](doc/Twitter.md)
-
-## Requirements
-
-* PHP 5.4+
-* [cURL](http://curl.haxx.se/libcurl/php/)
 
 ## Installing
 
